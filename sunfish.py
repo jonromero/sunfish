@@ -411,7 +411,7 @@ def main():
     pos = Position(initial, 0, (True,True), (True,True), 0, 0)
     searcher = Searcher()
     while True:
-        print_pos(pos)
+        #print_pos(pos)
 
         if pos.score <= -MATE_LOWER:
             print("You lost")
@@ -430,8 +430,9 @@ def main():
 
         # After our move we rotate the board and print it again.
         # This allows us to see the effect of our move.
-        print_pos(pos.rotate())
+        #print_pos(pos.rotate())
 
+        pos.rotate()
         if pos.score <= -MATE_LOWER:
             print("You won")
             break
