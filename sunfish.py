@@ -408,6 +408,8 @@ def print_pos(pos):
 
 
 def main():
+    illegal_moves_counter = 0
+
     pos = Position(initial, 0, (True,True), (True,True), 0, 0)
     searcher = Searcher()
     while True:
@@ -423,11 +425,16 @@ def main():
             match = re.match('([a-h][1-8])'*2, input('Your move: '))
             if match:
                 move = parse(match.group(1)), parse(match.group(2))
+                if move not in pos.gen_moves():
+                    illegal_moves_counter += 1
+                    print("Illegal move. Total:", illegal_moves_counter)
+
             else:
                 # Inform the user when invalid input (e.g. "help") is entered
                 print("Please enter a move like g8f6")
         pos = pos.move(move)
 
+        print(pos.gen_moves())
         # After our move we rotate the board and print it again.
         # This allows us to see the effect of our move.
         #print_pos(pos.rotate())
